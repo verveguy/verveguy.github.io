@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome to V3RV</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <title>Welcome to V3RV</title>
+    <link rel="stylesheet" href="./style.css">
 
 </head>
+
 <body>
-<!-- Sakura background animation
+    <!-- Sakura background animation
 
 Copyright (c) 2022 by Anand Davaasuren (https://codepen.io/at80/pen/tqdmv)
 
@@ -17,13 +19,13 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -->
-<!-- partial:index.partial.html -->
-<canvas id="sakura"></canvas>
-<div class="btnbg">
-</div>
+    <!-- partial:index.partial.html -->
+    <canvas id="sakura"></canvas>
+    <div class="btnbg">
+    </div>
 
-<!-- sakura shader -->
-<script id="sakura_point_vsh" type="x-shader/x_vertex">
+    <!-- sakura shader -->
+    <script id="sakura_point_vsh" type="x-shader/x_vertex">
 uniform mat4 uProjection;
 uniform mat4 uModelview;
 uniform vec3 uResolution;
@@ -115,7 +117,7 @@ void main(void) {
     distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));
 }
 </script>
-<script id="sakura_point_fsh" type="x-shader/x_fragment">
+    <script id="sakura_point_fsh" type="x-shader/x_fragment">
 #ifdef GL_ES
 //precision mediump float;
 precision highp float;
@@ -187,8 +189,8 @@ void main(void) {
     gl_FragColor = vec4(col * 0.5, alpha);
 }
 </script>
-<!-- effects -->
-<script id="fx_common_vsh" type="x-shader/x_vertex">
+    <!-- effects -->
+    <script id="fx_common_vsh" type="x-shader/x_vertex">
 uniform vec3 uResolution;
 attribute vec2 aPosition;
 
@@ -201,7 +203,7 @@ void main(void) {
     screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
 }
 </script>
-<script id="bg_fsh" type="x-shader/x_fragment">
+    <script id="bg_fsh" type="x-shader/x_fragment">
 #ifdef GL_ES
 //precision mediump float;
 precision highp float;
@@ -221,7 +223,7 @@ void main(void) {
     gl_FragColor = vec4(col * 0.5, 1.0);
 }
 </script>
-<script id="fx_brightbuf_fsh" type="x-shader/x_fragment">
+    <script id="fx_brightbuf_fsh" type="x-shader/x_fragment">
 #ifdef GL_ES
 //precision mediump float;
 precision highp float;
@@ -237,7 +239,7 @@ void main(void) {
     gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 1.0);
 }
 </script>
-<script id="fx_dirblur_r4_fsh" type="x-shader/x_fragment">
+    <script id="fx_dirblur_r4_fsh" type="x-shader/x_fragment">
 #ifdef GL_ES
 //precision mediump float;
 precision highp float;
@@ -258,8 +260,8 @@ void main(void) {
     gl_FragColor = col / 5.0;
 }
 </script>
-<!-- effect fragment shader template -->
-<script id="fx_common_fsh" type="x-shader/x_fragment">
+    <!-- effect fragment shader template -->
+    <script id="fx_common_fsh" type="x-shader/x_fragment">
 #ifdef GL_ES
 //precision mediump float;
 precision highp float;
@@ -274,8 +276,8 @@ void main(void) {
     gl_FragColor = texture2D(uSrc, texCoord);
 }
 </script>
-<!-- post processing -->
-<script id="pp_final_vsh" type="x-shader/x_vertex">
+    <!-- post processing -->
+    <script id="pp_final_vsh" type="x-shader/x_vertex">
 uniform vec3 uResolution;
 attribute vec2 aPosition;
 varying vec2 texCoord;
@@ -286,7 +288,7 @@ void main(void) {
     screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
 }
 </script>
-<script id="pp_final_fsh" type="x-shader/x_fragment">
+    <script id="pp_final_fsh" type="x-shader/x_fragment">
 #ifdef GL_ES
 //precision mediump float;
 precision highp float;
@@ -308,8 +310,9 @@ void main(void) {
     gl_FragColor.a = 1.0;
 }
 </script>
-<!-- partial -->
-  <script  src="./script.js"></script>
+    <!-- partial -->
+    <script src="./script.js"></script>
 
 </body>
+
 </html>
