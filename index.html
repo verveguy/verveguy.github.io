@@ -20,6 +20,9 @@
       --paper: #f7f2e6;
       --paper-edge: #efe7d5;
       --rule: #cfd8e3;
+      /* the ruling on the page itself — deliberately much fainter than --rule,
+         which is reserved for structural dividers */
+      --paper-line: #ebe8dc;
       --margin-rule: #d98b8b;
       --ink: #23262b;
       --ink-soft: #55606d;
@@ -37,6 +40,7 @@
         --paper: #16181c;
         --paper-edge: #101216;
         --rule: #262c35;
+        --paper-line: #1c1f25;
         --margin-rule: #7a3f45;
         --ink: #e6e2d8;
         --ink-soft: #a8b0bb;
@@ -79,8 +83,8 @@
           to bottom,
           transparent 0,
           transparent calc(var(--line-h) - 1px),
-          var(--rule) calc(var(--line-h) - 1px),
-          var(--rule) var(--line-h)
+          var(--paper-line) calc(var(--line-h) - 1px),
+          var(--paper-line) var(--line-h)
         ),
         var(--paper);
       background-position: 0 0.5rem;
