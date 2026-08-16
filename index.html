@@ -2,317 +2,522 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Welcome to V3RV</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>V3RV — Brett Adam's notebook</title>
+  <meta name="description"
+    content="A working notebook: Fabrik, Liminis, Concept Maps, and other things built by Brett Adam.">
+  <meta name="color-scheme" content="light dark">
 
+  <meta property="og:title" content="V3RV — Brett Adam's notebook">
+  <meta property="og:description" content="A working notebook: Fabrik, Liminis, Concept Maps, and other things built.">
+  <meta property="og:url" content="https://v3rv.com/">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root {
+      /* paper */
+      --paper: #f7f2e6;
+      --paper-edge: #efe7d5;
+      --rule: #cfd8e3;
+      --margin-rule: #d98b8b;
+      --ink: #23262b;
+      --ink-soft: #55606d;
+      --ink-faint: #8c96a3;
+      --pencil: #6b7684;
+      --blue: #2a5d9e;
+      --blue-soft: #4a7fc4;
+      --stamp: #b0533a;
+      --stamp-green: #4a7a52;
+      --line-h: 1.75rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #16181c;
+        --paper-edge: #101216;
+        --rule: #262c35;
+        --margin-rule: #7a3f45;
+        --ink: #e6e2d8;
+        --ink-soft: #a8b0bb;
+        --ink-faint: #6f7885;
+        --pencil: #9aa3af;
+        --blue: #79aae6;
+        --blue-soft: #94bdf0;
+        --stamp: #d2765c;
+        --stamp-green: #7aab84;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: var(--paper-edge);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+      font-size: 17px;
+      line-height: var(--line-h);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ---- the sheet ---------------------------------------------------- */
+
+    .sheet {
+      max-width: 46rem;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 3.5rem 1.75rem 5rem 1.75rem;
+      background:
+        /* ruled lines */
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent calc(var(--line-h) - 1px),
+          var(--rule) calc(var(--line-h) - 1px),
+          var(--rule) var(--line-h)
+        ),
+        var(--paper);
+      background-position: 0 0.5rem;
+      border-left: 1px solid var(--paper-edge);
+      border-right: 1px solid var(--paper-edge);
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.06);
+      position: relative;
+    }
+
+    /* the red margin rule, drawn only where there's room for it */
+    @media (min-width: 46rem) {
+      .sheet {
+        padding-left: 5.5rem;
+        padding-right: 3rem;
+      }
+      .sheet::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 4.25rem;
+        width: 1px;
+        background: var(--margin-rule);
+        opacity: 0.55;
+      }
+    }
+
+    /* ---- masthead ------------------------------------------------------ */
+
+    header {
+      margin-bottom: 3.5rem;
+    }
+
+    .wordmark {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: clamp(2.5rem, 9vw, 3.75rem);
+      line-height: 1.2;
+      letter-spacing: 0.12em;
+      margin: 0;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .wordmark .dim { color: var(--ink-faint); font-weight: 400; }
+
+    .subtitle {
+      margin: 0.25rem 0 0;
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      font-style: italic;
+    }
+
+    .intro {
+      margin: 1.75rem 0 0;
+      color: var(--ink-soft);
+      max-width: 34rem;
+    }
+
+    .intro a { color: var(--blue); }
+
+    /* ---- section headings ---------------------------------------------- */
+
+    h2.section {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin: 0 0 1.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    /* ---- an entry ------------------------------------------------------ */
+
+    .entry {
+      margin: 0 0 3.5rem;
+      position: relative;
+    }
+
+    .entry-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.6rem 0.85rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .entry h3 {
+      margin: 0;
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 1.35;
+      letter-spacing: 0.01em;
+    }
+
+    .entry h3 a {
+      color: var(--ink);
+      text-decoration: none;
+      background-image: linear-gradient(to right, var(--blue-soft), var(--blue-soft));
+      background-size: 100% 1px;
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      padding-bottom: 2px;
+      transition: background-size 160ms ease, color 160ms ease;
+    }
+
+    .entry h3 a:hover,
+    .entry h3 a:focus-visible {
+      color: var(--blue);
+      background-size: 100% 2px;
+    }
+
+    .lede {
+      margin: 0 0 0.85rem;
+      color: var(--ink);
+    }
+
+    .detail {
+      margin: 0 0 0.85rem;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    /* ---- rubber-stamp status marks -------------------------------------- */
+
+    .stamp {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.5rem;
+      border: 1px solid currentColor;
+      border-radius: 2px;
+      white-space: nowrap;
+      display: inline-block;
+      transform: rotate(-1.5deg);
+      opacity: 0.85;
+    }
+
+    .stamp.open { color: var(--stamp-green); }
+    .stamp.free { color: var(--blue); }
+    .stamp.soon { color: var(--stamp); }
+
+    /* ---- link rows ------------------------------------------------------ */
+
+    .links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.25rem;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+    }
+
+    .links a {
+      color: var(--blue);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 140ms ease;
+    }
+
+    .links a:hover,
+    .links a:focus-visible { border-bottom-color: var(--blue); }
+
+    .links .arrow { color: var(--ink-faint); }
+
+    /* ---- nested components (the Liminis parts) --------------------------- */
+
+    .parts {
+      margin: 1.5rem 0 0;
+      padding: 0 0 0 1.25rem;
+      list-style: none;
+      border-left: 2px solid var(--rule);
+    }
+
+    .parts > li { margin-bottom: 1.5rem; }
+    .parts > li:last-child { margin-bottom: 0; }
+
+    .part-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem 0.75rem;
+    }
+
+    .part-head h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    .part-head h4 a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--blue-soft);
+      padding-bottom: 1px;
+    }
+
+    .part-head h4 a:hover,
+    .part-head h4 a:focus-visible { color: var(--blue); }
+
+    .part-head code,
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.8rem;
+      color: var(--ink-faint);
+    }
+
+    .parts p {
+      margin: 0.3rem 0 0.6rem;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    /* ---- marginalia ------------------------------------------------------ */
+
+    .note {
+      color: var(--pencil);
+      font-size: 0.85rem;
+      font-style: italic;
+      line-height: 1.5;
+      margin: 0.75rem 0 0;
+      padding-left: 1rem;
+      border-left: 2px solid var(--margin-rule);
+      max-width: 30rem;
+      opacity: 0.9;
+    }
+
+    /* ---- odds and ends --------------------------------------------------- */
+
+    .minor {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .minor li {
+      margin-bottom: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.15rem 0.6rem;
+    }
+
+    .minor a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--blue-soft);
+      padding-bottom: 1px;
+      white-space: nowrap;
+    }
+
+    .minor a:hover,
+    .minor a:focus-visible { color: var(--blue); }
+
+    .minor span {
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+    }
+
+    /* ---- colophon --------------------------------------------------------- */
+
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--rule);
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-faint);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      justify-content: space-between;
+    }
+
+    footer a { color: var(--ink-faint); }
+    footer a:hover { color: var(--blue); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Sakura background animation
+  <div class="sheet">
 
-Copyright (c) 2022 by Anand Davaasuren (https://codepen.io/at80/pen/tqdmv)
+    <header>
+      <h1 class="wordmark">V3RV<span class="dim">.com</span></h1>
+      <p class="subtitle">Brett Adam — a working notebook</p>
+      <p class="intro">
+        Things built, mostly in the open. Some are finished tools other people use; some are
+        experiments still drying on the page. What follows is the current index.
+      </p>
+    </header>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    <main>
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+      <h2 class="section">In use</h2>
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
--->
-    <!-- partial:index.partial.html -->
-    <canvas id="sakura"></canvas>
-    <div class="btnbg">
-    </div>
+      <!-- Fabrik -->
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://fabrik.handarbeit.io">Fabrik</a></h3>
+          <span class="stamp open">Open source · Apache-2.0</span>
+        </div>
+        <p class="lede">
+          Drive Claude Code through an SDLC pipeline on your GitHub Project board —
+          Specify → Research → Plan → Implement → Review → Validate.
+        </p>
+        <p class="detail">
+          A Go CLI for issue-driven development. Fabrik watches a Project board and moves work
+          through configurable stages: the issue body is the spec, comments are input, and the
+          board columns define the workflow. Human in the loop, or on it.
+        </p>
+        <ul class="links">
+          <li><span class="arrow">→</span> <a href="https://fabrik.handarbeit.io">Documentation</a></li>
+          <li><span class="arrow">→</span> <a href="https://github.com/handarbeit/fabrik">Source</a></li>
+        </ul>
+        <p class="note">
+          Fabrik lives under its own roof at <span class="mono">handarbeit.io</span> — hand-crafted
+          software, the shop where this one is made.
+        </p>
+      </article>
 
-    <!-- sakura shader -->
-    <script id="sakura_point_vsh" type="x-shader/x_vertex">
-uniform mat4 uProjection;
-uniform mat4 uModelview;
-uniform vec3 uResolution;
-uniform vec3 uOffset;
-uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
-uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
+      <!-- Concept Maps -->
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://v3rv.com/concept-maps/">Concept Maps</a></h3>
+          <span class="stamp free">Free to use</span>
+        </div>
+        <p class="lede">
+          A collaborative concept mapping tool — draw the shape of an idea, together, in real time.
+        </p>
+        <p class="detail">
+          Graph view and structured-text view over the same map, live presence, sticky-note comments,
+          perspectives that filter a map down to one view of it, rich metadata and markdown notes on
+          both concepts and relationships, and version history that exports to git-friendly JSON.
+        </p>
+        <ul class="links">
+          <li><span class="arrow">→</span> <a href="https://v3rv.com/concept-maps/">Open the app</a></li>
+          <li><span class="arrow">→</span> <a href="https://v3rv.com/concept-maps/docs/docs/user-guide/intro">User guide</a></li>
+        </ul>
+        <p class="note">
+          Free to use, but not open source — the source stays closed for now.
+        </p>
+      </article>
 
-attribute vec3 aPosition;
-attribute vec3 aEuler;
-attribute vec2 aMisc; //x:size, y:fade
+      <h2 class="section">Liminis</h2>
 
-varying vec3 pposition;
-varying float psize;
-varying float palpha;
-varying float pdist;
+      <article class="entry">
+        <p class="lede">
+          A local-first workspace for thinking with an amanuensis — notes, context, and the
+          machinery underneath them, kept in ordinary files on your own machine.
+        </p>
+        <p class="detail">
+          The whole is still coming together. Its components are being released on their own as
+          they become useful outside it.
+        </p>
 
-//varying mat3 rotMat;
-varying vec3 normX;
-varying vec3 normY;
-varying vec3 normZ;
-varying vec3 normal;
+        <ul class="parts">
+          <li>
+            <div class="part-head">
+              <h4><a href="https://v3rv.com/liminis-context-graph/">Liminis Context Graph</a></h4>
+              <span class="stamp open">Open source · MIT</span>
+            </div>
+            <p>
+              A local-first context graph engine: one Rust binary that turns a stream of text into a
+              queryable graph of entities, relationships, and episodes. Property graph, HNSW vector
+              search, and full-text search in a single embedded process — no database server, no
+              separate vector store, no search cluster. The write-ahead log is plain JSONL and is the
+              source of truth; the database is a derived index you can throw away and rebuild.
+              Speaks JSON-RPC over a Unix socket, or runs as a native MCP server over stdio.
+            </p>
+            <ul class="links">
+              <li><span class="arrow">→</span> <a href="https://v3rv.com/liminis-context-graph/">Documentation</a></li>
+              <li><span class="arrow">→</span> <a href="https://github.com/verveguy/liminis-context-graph">Source</a></li>
+            </ul>
+          </li>
 
-varying float diffuse;
-varying float specular;
-varying float rstop;
-varying float distancefade;
+          <li>
+            <div class="part-head">
+              <h4>Liminis Editor</h4>
+              <code>@liminis/editor</code>
+              <span class="stamp soon">Opening soon · MIT</span>
+            </div>
+            <p>
+              A Lexical-based markdown WYSIWYG editor that round-trips through mdast, with a
+              host-injection seam so it can be embedded in an Electron app, a browser app, or
+              anything that can supply a message channel. Tables, task lists, footnotes, callouts,
+              code blocks, LaTeX, Mermaid and C4 diagrams, frontmatter, wiki-links — plus a
+              range-anchored annotation mechanism that survives edits, of which comments and
+              corrections are just two configurations.
+            </p>
+            <p class="note">
+              Extracted from Liminis so it can stand on its own. The repository is being prepared
+              for release — check back shortly.
+            </p>
+          </li>
+        </ul>
+      </article>
 
-void main(void) {
-    // Projection is based on vertical angle
-    vec4 pos = uModelview * vec4(aPosition + uOffset, 1.0);
-    gl_Position = uProjection * pos;
-    gl_PointSize = aMisc.x * uProjection[1][1] / -pos.z * uResolution.y * 0.5;
-    
-    pposition = pos.xyz;
-    psize = aMisc.x;
-    pdist = length(pos.xyz);
-    palpha = smoothstep(0.0, 1.0, (pdist - 0.1) / uFade.z);
-    
-    vec3 elrsn = sin(aEuler);
-    vec3 elrcs = cos(aEuler);
-    mat3 rotx = mat3(
-        1.0, 0.0, 0.0,
-        0.0, elrcs.x, elrsn.x,
-        0.0, -elrsn.x, elrcs.x
-    );
-    mat3 roty = mat3(
-        elrcs.y, 0.0, -elrsn.y,
-        0.0, 1.0, 0.0,
-        elrsn.y, 0.0, elrcs.y
-    );
-    mat3 rotz = mat3(
-        elrcs.z, elrsn.z, 0.0, 
-        -elrsn.z, elrcs.z, 0.0,
-        0.0, 0.0, 1.0
-    );
-    mat3 rotmat = rotx * roty * rotz;
-    normal = rotmat[2];
-    
-    mat3 trrotm = mat3(
-        rotmat[0][0], rotmat[1][0], rotmat[2][0],
-        rotmat[0][1], rotmat[1][1], rotmat[2][1],
-        rotmat[0][2], rotmat[1][2], rotmat[2][2]
-    );
-    normX = trrotm[0];
-    normY = trrotm[1];
-    normZ = trrotm[2];
-    
-    const vec3 lit = vec3(0.6917144638660746, 0.6917144638660746, -0.20751433915982237);
-    
-    float tmpdfs = dot(lit, normal);
-    if(tmpdfs < 0.0) {
-        normal = -normal;
-        tmpdfs = dot(lit, normal);
-    }
-    diffuse = 0.4 + tmpdfs;
-    
-    vec3 eyev = normalize(-pos.xyz);
-    if(dot(eyev, normal) > 0.0) {
-        vec3 hv = normalize(eyev + lit);
-        specular = pow(max(dot(hv, normal), 0.0), 20.0);
-    }
-    else {
-        specular = 0.0;
-    }
-    
-    rstop = clamp((abs(pdist - uDOF.x) - uDOF.y) / uDOF.z, 0.0, 1.0);
-    rstop = pow(rstop, 0.5);
-    //-0.69315 = ln(0.5)
-    distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));
-}
-</script>
-    <script id="sakura_point_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
+      <h2 class="section">Odds and ends</h2>
 
-uniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius
-uniform vec3 uFade; //x:start distance, y:half distance, z:near fade start
+      <ul class="minor">
+        <li>
+          <a href="https://github.com/verveguy/claude-topics">claude-topics</a>
+          <span>— pick up, put down, and hand off long-running Claude Code work, from anywhere,
+            including your phone.</span>
+        </li>
+        <li>
+          <a href="https://v3rv.com/idd/">IDD character builder</a>
+          <span>— an unofficial Claude Code plugin: an interactive character builder for the
+            In Darkened Dreams LARP.</span>
+        </li>
+        <li>
+          <a href="https://github.com/verveguy/tana-helper">tana-helper</a>
+          <span>— a small web service handling API calls from Tana, and doing useful things with
+            them.</span>
+        </li>
+      </ul>
 
-const vec3 fadeCol = vec3(0.08, 0.03, 0.06);
+    </main>
 
-varying vec3 pposition;
-varying float psize;
-varying float palpha;
-varying float pdist;
+    <footer>
+      <span>© Brett Adam</span>
+      <span><a href="https://github.com/verveguy">github.com/verveguy</a></span>
+    </footer>
 
-//varying mat3 rotMat;
-varying vec3 normX;
-varying vec3 normY;
-varying vec3 normZ;
-varying vec3 normal;
-
-varying float diffuse;
-varying float specular;
-varying float rstop;
-varying float distancefade;
-
-float ellipse(vec2 p, vec2 o, vec2 r) {
-    vec2 lp = (p - o) / r;
-    return length(lp) - 1.0;
-}
-
-void main(void) {
-    vec3 p = vec3(gl_PointCoord - vec2(0.5, 0.5), 0.0) * 2.0;
-    vec3 d = vec3(0.0, 0.0, -1.0);
-    float nd = normZ.z; //dot(-normZ, d);
-    if(abs(nd) < 0.0001) discard;
-    
-    float np = dot(normZ, p);
-    vec3 tp = p + d * np / nd;
-    vec2 coord = vec2(dot(normX, tp), dot(normY, tp));
-    
-    //angle = 15 degree
-    const float flwrsn = 0.258819045102521;
-    const float flwrcs = 0.965925826289068;
-    mat2 flwrm = mat2(flwrcs, -flwrsn, flwrsn, flwrcs);
-    vec2 flwrp = vec2(abs(coord.x), coord.y) * flwrm;
-    
-    float r;
-    if(flwrp.x < 0.0) {
-        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.36, 0.96) * 0.5);
-    }
-    else {
-        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.58, 0.96) * 0.5);
-    }
-    
-    if(r > rstop) discard;
-    
-    vec3 col = mix(vec3(1.0, 0.8, 0.75), vec3(1.0, 0.9, 0.87), r);
-    float grady = mix(0.0, 1.0, pow(coord.y * 0.5 + 0.5, 0.35));
-    col *= vec3(1.0, grady, grady);
-    col *= mix(0.8, 1.0, pow(abs(coord.x), 0.3));
-    col = col * diffuse + specular;
-    
-    col = mix(fadeCol, col, distancefade);
-    
-    float alpha = (rstop > 0.001)? (0.5 - r / (rstop * 2.0)) : 1.0;
-    alpha = smoothstep(0.0, 1.0, alpha) * palpha;
-    
-    gl_FragColor = vec4(col * 0.5, alpha);
-}
-</script>
-    <!-- effects -->
-    <script id="fx_common_vsh" type="x-shader/x_vertex">
-uniform vec3 uResolution;
-attribute vec2 aPosition;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    gl_Position = vec4(aPosition, 0.0, 1.0);
-    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
-    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
-}
-</script>
-    <script id="bg_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-
-uniform vec2 uTimes;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec3 col;
-    float c;
-    vec2 tmpv = texCoord * vec2(0.8, 1.0) - vec2(0.95, 1.0);
-    c = exp(-pow(length(tmpv) * 1.8, 2.0));
-    col = mix(vec3(0.02, 0.0, 0.03), vec3(0.96, 0.98, 1.0) * 1.5, c);
-    gl_FragColor = vec4(col * 0.5, 1.0);
-}
-</script>
-    <script id="fx_brightbuf_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec4 col = texture2D(uSrc, texCoord);
-    gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 1.0);
-}
-</script>
-    <script id="fx_dirblur_r4_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-uniform vec4 uBlurDir; //dir(x, y), stride(z, w)
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    vec4 col = texture2D(uSrc, texCoord);
-    col = col + texture2D(uSrc, texCoord + uBlurDir.xy * uDelta);
-    col = col + texture2D(uSrc, texCoord - uBlurDir.xy * uDelta);
-    col = col + texture2D(uSrc, texCoord + (uBlurDir.xy + uBlurDir.zw) * uDelta);
-    col = col + texture2D(uSrc, texCoord - (uBlurDir.xy + uBlurDir.zw) * uDelta);
-    gl_FragColor = col / 5.0;
-}
-</script>
-    <!-- effect fragment shader template -->
-    <script id="fx_common_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform vec2 uDelta;
-
-varying vec2 texCoord;
-varying vec2 screenCoord;
-
-void main(void) {
-    gl_FragColor = texture2D(uSrc, texCoord);
-}
-</script>
-    <!-- post processing -->
-    <script id="pp_final_vsh" type="x-shader/x_vertex">
-uniform vec3 uResolution;
-attribute vec2 aPosition;
-varying vec2 texCoord;
-varying vec2 screenCoord;
-void main(void) {
-    gl_Position = vec4(aPosition, 0.0, 1.0);
-    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);
-    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);
-}
-</script>
-    <script id="pp_final_fsh" type="x-shader/x_fragment">
-#ifdef GL_ES
-//precision mediump float;
-precision highp float;
-#endif
-uniform sampler2D uSrc;
-uniform sampler2D uBloom;
-uniform vec2 uDelta;
-varying vec2 texCoord;
-varying vec2 screenCoord;
-void main(void) {
-    vec4 srccol = texture2D(uSrc, texCoord) * 2.0;
-    vec4 bloomcol = texture2D(uBloom, texCoord);
-    vec4 col;
-    col = srccol + bloomcol * (vec4(1.0) + srccol);
-    col *= smoothstep(1.0, 0.0, pow(length((texCoord - vec2(0.5)) * 2.0), 1.2) * 0.5);
-    col = pow(col, vec4(0.45454545454545)); //(1.0 / 2.2)
-    
-    gl_FragColor = vec4(col.rgb, 1.0);
-    gl_FragColor.a = 1.0;
-}
-</script>
-    <!-- partial -->
-    <script src="./script.js"></script>
-
+  </div>
 </body>
 
 </html>
