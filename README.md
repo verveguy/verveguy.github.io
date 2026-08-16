@@ -13,6 +13,7 @@ inherits that domain. The root page is an index over things that already live be
 | --- | --- |
 | `v3rv.com/` | this repo (`master`, root) |
 | `v3rv.com/liminis-context-graph/` | `verveguy/liminis-context-graph` (`main/docs`) |
+| `v3rv.com/liminis-editor/` | `verveguy/liminis-editor` |
 | `v3rv.com/concept-maps/` | `verveguy/concept-maps` (`main`) |
 | `v3rv.com/idd/` | `verveguy/idd` (`main`) |
 | `v3rv.com/max/` | this repo — resume redirect |
