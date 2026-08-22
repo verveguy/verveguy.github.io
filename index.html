@@ -14,6 +14,19 @@
   <meta property="og:url" content="https://v3rv.com/">
   <meta property="og:type" content="website">
 
+  <script>
+    // Apply any stored choice before first paint, so a forced theme never flashes
+    // the other palette. No stored value means "follow the OS".
+    (function () {
+      try {
+        var t = localStorage.getItem('v3rv-theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) { /* private mode, blocked storage — fall back to the OS */ }
+    })();
+  </script>
+
   <style>
     :root {
       /* paper */
@@ -33,10 +46,14 @@
       --stamp: #b0533a;
       --stamp-green: #4a7a52;
       --line-h: 1.75rem;
+      color-scheme: light;
     }
 
+    /* Dark palette, defined once per selector so an explicit choice wins in both
+       directions: the media query yields to [data-theme="light"], and
+       [data-theme="dark"] applies even on a light-mode OS. */
     @media (prefers-color-scheme: dark) {
-      :root {
+      :root:not([data-theme="light"]) {
         --paper: #16181c;
         --paper-edge: #101216;
         --rule: #262c35;
@@ -50,7 +67,25 @@
         --blue-soft: #94bdf0;
         --stamp: #d2765c;
         --stamp-green: #7aab84;
+        color-scheme: dark;
       }
+    }
+
+    :root[data-theme="dark"] {
+      --paper: #16181c;
+      --paper-edge: #101216;
+      --rule: #262c35;
+      --paper-line: #1c1f25;
+      --margin-rule: #7a3f45;
+      --ink: #e6e2d8;
+      --ink-soft: #a8b0bb;
+      --ink-faint: #6f7885;
+      --pencil: #9aa3af;
+      --blue: #79aae6;
+      --blue-soft: #94bdf0;
+      --stamp: #d2765c;
+      --stamp-green: #7aab84;
+      color-scheme: dark;
     }
 
     * { box-sizing: border-box; }
@@ -384,6 +419,57 @@
     footer a { color: var(--ink-faint); }
     footer a:hover { color: var(--blue); }
 
+    /* ---- theme switch ----------------------------------------------------- */
+
+    .masthead-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .theme-switch {
+      display: inline-flex;
+      align-items: stretch;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .theme-switch[hidden] { display: none; }
+
+    .theme-switch button {
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      background: transparent;
+      border: 0;
+      border-left: 1px solid var(--rule);
+      padding: 0.3rem 0.55rem;
+      cursor: pointer;
+      transition: color 140ms ease, background-color 140ms ease;
+    }
+
+    .theme-switch button:first-child { border-left: 0; }
+
+    .theme-switch button:hover { color: var(--ink-soft); }
+
+    .theme-switch button[aria-pressed="true"] {
+      color: var(--ink);
+      background: var(--paper-line);
+    }
+
+    .theme-switch button:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: -2px;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; }
     }
@@ -394,7 +480,14 @@
   <div class="sheet">
 
     <header>
-      <h1 class="wordmark">V3RV<span class="dim">.com</span></h1>
+      <div class="masthead-row">
+        <h1 class="wordmark">V3RV<span class="dim">.com</span></h1>
+        <div class="theme-switch" role="group" aria-label="Colour theme" hidden>
+          <button type="button" data-mode="light" aria-pressed="false">Light</button>
+          <button type="button" data-mode="system" aria-pressed="true">Auto</button>
+          <button type="button" data-mode="dark" aria-pressed="false">Dark</button>
+        </div>
+      </div>
       <p class="subtitle"><a href="https://www.linkedin.com/in/badam">Brett Adam</a> — a working notebook</p>
       <p class="intro">
         Things built, mostly in the open. Some are finished tools other people use; some are
@@ -540,6 +633,45 @@
     </footer>
 
   </div>
+
+  <script>
+    (function () {
+      var KEY = 'v3rv-theme';
+      var root = document.documentElement;
+      var group = document.querySelector('.theme-switch');
+      if (!group) return;
+      var buttons = Array.prototype.slice.call(group.querySelectorAll('button'));
+
+      function stored() {
+        try {
+          var t = localStorage.getItem(KEY);
+          return (t === 'light' || t === 'dark') ? t : 'system';
+        } catch (e) { return 'system'; }
+      }
+
+      function apply(mode) {
+        if (mode === 'system') root.removeAttribute('data-theme');
+        else root.setAttribute('data-theme', mode);
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.mode === mode));
+        });
+      }
+
+      buttons.forEach(function (b) {
+        b.addEventListener('click', function () {
+          var mode = b.dataset.mode;
+          try {
+            if (mode === 'system') localStorage.removeItem(KEY);
+            else localStorage.setItem(KEY, mode);
+          } catch (e) { /* choice just won't persist */ }
+          apply(mode);
+        });
+      });
+
+      apply(stored());
+      group.hidden = false;   // only offered once it can actually work
+    })();
+  </script>
 </body>
 
 </html>
