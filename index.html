@@ -280,6 +280,12 @@
     .stamp.free { color: var(--blue); }
     .stamp.soon { color: var(--stamp); }
 
+    .stamp.new {
+      color: var(--ink-faint);
+      border-style: dashed;
+      transform: rotate(1deg);
+    }
+
     /* ---- link rows ------------------------------------------------------ */
 
     .links {
@@ -600,6 +606,38 @@
             </ul>
             <p class="note">
               Extracted from Liminis so it can stand on its own.
+            </p>
+          </li>
+
+          <li>
+            <div class="part-head">
+              <h4><a href="https://github.com/verveguy/liminis-diagrams">Liminis Diagrams</a></h4>
+              <code>@liminis/diagrams</code>
+              <span class="stamp open">Open source · MIT</span>
+              <span class="stamp new">New</span>
+            </div>
+            <p>
+              C4 architecture diagrams for JavaScript: parse C4-PlantUML macro syntax, lay it out
+              with dagre, render to SVG, with optional drag-to-reposition editing. Where most C4
+              tooling either round-trips through a PlantUML server or speaks a Mermaid dialect, this
+              hands back the parsed AST and the computed layout <em>as data</em> — which is what you
+              need to build tooling on top of, rather than just emit a picture. Three entry points:
+              <code>/core</code> parses and lays out with no React involved and
+              <code>@dagrejs/dagre</code> as its only dependency, so it runs just as happily in a CLI
+              or a CI job; <code>/react</code> adds the renderer and dragging; <code>/server</code>
+              turns source into SVG in a single call. The interactive renderer is controlled —
+              positions in, changes back out — so the host decides how they are stored; the editor
+              keeps them in the code fence's own meta string, which leaves a hand-arranged diagram
+              sitting in plain, diffable text.
+            </p>
+            <ul class="links">
+              <li><span class="arrow">→</span> <a href="https://v3rv.com/liminis-diagrams/">Live demo</a></li>
+              <li><span class="arrow">→</span> <a href="https://github.com/verveguy/liminis-diagrams">Source</a></li>
+              <li><span class="arrow">→</span> <a href="https://www.npmjs.com/package/@liminis/diagrams">npm</a></li>
+            </ul>
+            <p class="note">
+              Extracted from the editor, where it renders <code>c4</code> code blocks — but nothing
+              in it is bound to that editor. New, at 0.1.0.
             </p>
           </li>
         </ul>
