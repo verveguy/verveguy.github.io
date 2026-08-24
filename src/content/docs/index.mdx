@@ -1,0 +1,124 @@
+---
+title: Brett Adam
+description: Things built, mostly in the open — Fabrik, Liminis, Concept Maps, and the components you can use today.
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components'
+
+Things built, mostly in the open. Some are finished tools other people use; some
+are experiments still drying on the page. What follows is the current index.
+
+Most of what is listed here lives under this domain: the documentation sites for
+each project are paths on `v3rv.com`, not separate destinations, which is why
+they share this one's furniture.
+
+## In use
+
+### Fabrik <span class="status status-oss">Apache-2.0</span>
+
+Drive Claude Code through an SDLC pipeline on your GitHub Project board —
+Specify → Research → Plan → Implement → Review → Validate.
+
+A Go CLI for issue-driven development. Fabrik watches a Project board and moves
+work through configurable stages: the issue body is the spec, comments are input,
+and the board columns define the workflow. Human in the loop, or on it.
+
+Fabrik lives under its own roof at `handarbeit.io` — hand-crafted software, the
+shop where that one is made.
+
+<CardGrid>
+  <LinkCard title="Documentation" href="https://fabrik.handarbeit.io" description="Guides, examples, and the stage reference." />
+  <LinkCard title="Source" href="https://github.com/handarbeit/fabrik" description="handarbeit/fabrik — Go, Apache-2.0." />
+</CardGrid>
+
+### Concept Maps <span class="status status-free">Free to use</span>
+
+A collaborative concept mapping tool — draw the shape of an idea, together, in
+real time.
+
+Graph view and structured-text view over the same map, live presence, sticky-note
+comments, perspectives that filter a map down to one view of it, rich metadata
+and markdown notes on both concepts and relationships, and version history that
+exports to git-friendly JSON.
+
+Free to use, but not open source — the source stays closed for now.
+
+<CardGrid>
+  <LinkCard title="Open the app" href="/concept-maps/" description="No installation; sign in with a emailed code." />
+  <LinkCard title="User guide" href="/concept-maps/docs/docs/user-guide/intro" description="How to build and share a map." />
+</CardGrid>
+
+## Liminis
+
+A local-first workspace for thinking with an amanuensis — notes, the context
+graph built from them, and the machinery underneath, kept as ordinary files on
+your own machine.
+
+The application is in private alpha. Its components are released on their own as
+they become useful outside it, and those are what you can use today.
+
+<LinkCard title="About Liminis" href="/liminis/" description="What it is, and why there are components at all." />
+
+### Liminis Context Graph <span class="status status-oss">MIT</span>
+
+A local-first context graph engine: one Rust binary that turns a stream of text
+into a queryable graph of entities, relationships, and episodes. Property graph,
+HNSW vector search, and full-text search in a single embedded process — no
+database server, no separate vector store, no search cluster.
+
+The write-ahead log is plain JSONL and is the source of truth; the database is a
+derived index you can throw away and rebuild. Speaks JSON-RPC over a Unix socket,
+or runs as a native MCP server over stdio.
+
+<CardGrid>
+  <LinkCard title="Documentation" href="/liminis-context-graph/" description="Ontology, configuration, IPC and MCP reference." />
+  <LinkCard title="Source" href="https://github.com/verveguy/liminis-context-graph" description="Rust, MIT." />
+</CardGrid>
+
+### Liminis Editor <span class="status status-oss">MIT</span>
+
+A Lexical-based markdown WYSIWYG editor that round-trips through mdast, with a
+host-injection seam so it can be embedded in an Electron app, a browser app, or
+anything that can supply a message channel.
+
+Tables, task lists, footnotes, callouts, code blocks, LaTeX, Mermaid and C4
+diagrams, frontmatter, wiki-links — plus a range-anchored annotation mechanism
+that survives edits, of which comments and corrections are just two
+configurations.
+
+<CardGrid>
+  <LinkCard title="Documentation" href="/liminis-editor/" description="Guides, architecture, and the API." />
+  <LinkCard title="Live demo" href="/liminis-editor/demo/" description="The editor, running in your browser." />
+  <LinkCard title="npm" href="https://www.npmjs.com/package/@liminis/editor" description="@liminis/editor" />
+  <LinkCard title="Source" href="https://github.com/verveguy/liminis-editor" description="TypeScript, MIT." />
+</CardGrid>
+
+### Liminis Diagrams <span class="status status-oss">MIT</span> <span class="status status-new">New</span>
+
+C4 architecture diagrams for JavaScript: parse C4-PlantUML macro syntax, lay it
+out with dagre, render to SVG, with optional drag-to-reposition editing.
+
+Where most C4 tooling either round-trips through a PlantUML server or speaks a
+Mermaid dialect, this hands back the parsed AST and the computed layout *as
+data* — which is what you need to build tooling on top of, rather than just emit
+a picture.
+
+Its documentation renders itself with the library: the diagrams on those pages
+are not images but live instances of the renderer, drawn in your browser from C4
+source held in the page's own markdown — and on the playground, editable in
+place, redrawing as you type.
+
+<CardGrid>
+  <LinkCard title="Documentation" href="/liminis-diagrams/" description="Diagrams drawn by the package they document." />
+  <LinkCard title="Playground" href="/liminis-diagrams/playground/" description="Edit the C4 source and watch it redraw." />
+  <LinkCard title="npm" href="https://www.npmjs.com/package/@liminis/diagrams" description="@liminis/diagrams" />
+  <LinkCard title="Source" href="https://github.com/verveguy/liminis-diagrams" description="TypeScript, MIT." />
+</CardGrid>
+
+## Odds and ends
+
+<CardGrid>
+  <LinkCard title="claude-topics" href="https://github.com/verveguy/claude-topics" description="Pick up, put down, and hand off long-running Claude Code work — from anywhere, including your phone." />
+  <LinkCard title="IDD character builder" href="/idd/" description="An unofficial Claude Code plugin: an interactive character builder for the In Darkened Dreams LARP." />
+  <LinkCard title="tana-helper" href="https://github.com/verveguy/tana-helper" description="A small web service handling API calls from Tana, and doing useful things with them." />
+</CardGrid>

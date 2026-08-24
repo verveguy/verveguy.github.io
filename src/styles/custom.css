@@ -1,0 +1,59 @@
+/* Deliberately minimal. The project documentation sites run Starlight's default
+   theme unmodified, and this site's job is to belong to that set — so anything
+   added here should earn its place rather than assert an identity. */
+
+/* The lead paragraph under the page title, used to set the scene. */
+.sl-markdown-content > p:first-of-type {
+  font-size: var(--sl-text-lg);
+  color: var(--sl-color-gray-2);
+}
+
+/* Status markers on project headings. Slapped-on rubber stamps rather than
+   flat pills: tilted, inked, monospace. The colours are Starlight's own
+   semantic tokens, so they stay legible in both themes and belong to the same
+   palette as the asides on the documentation sites. */
+.status {
+  display: inline-block;
+  margin-inline-start: 0.5rem;
+  padding: 0.12rem 0.45rem;
+  border: 1px solid currentColor;
+  border-radius: 0.2rem;
+  font-family: var(--sl-font-system-mono);
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  color: var(--sl-color-gray-2);
+  transform: rotate(-1.5deg);
+}
+
+/* Open source. */
+.status-oss {
+  color: var(--sl-color-green-high);
+  background: var(--sl-color-green-low);
+}
+
+/* Usable, but the source is not open. */
+.status-free {
+  color: var(--sl-color-blue-high);
+  background: var(--sl-color-blue-low);
+}
+
+/* Newly released. Dashed, and tilted the other way, so that where it sits
+   beside a licence stamp the two read as two separate marks. */
+.status-new {
+  color: var(--sl-color-orange-high);
+  background: var(--sl-color-orange-low);
+  border-style: dashed;
+  transform: rotate(1.25deg);
+}
+
+/* A stamp is a flourish, not information anyone should have to decode at an
+   angle. */
+@media (prefers-reduced-motion: reduce) {
+  .status {
+    transform: none;
+  }
+}

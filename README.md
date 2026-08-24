@@ -1,42 +1,57 @@
 # verveguy.github.io
 
-The root page for [v3rv.com](https://v3rv.com) — a portfolio index of open-source
-projects and tools, served via GitHub Pages from this repo.
+The root of [v3rv.com](https://v3rv.com) — a portfolio index of open-source
+projects and tools, built with [Astro](https://astro.build) and
+[Starlight](https://starlight.astro.build).
 
-## What lives where
+## Why Starlight
 
-This is the **user Pages repo** for the `verveguy` account, so the `CNAME` here binds
-`v3rv.com` to it — and, importantly, every *project* Pages site under the same account
-inherits that domain. The root page is an index over things that already live beneath it:
+Every *project* Pages site under the `verveguy` account inherits this repo's
+custom domain, so they are all paths on one host rather than separate
+destinations:
 
 | URL | Served from |
 | --- | --- |
-| `v3rv.com/` | this repo (`master`, root) |
-| `v3rv.com/liminis-context-graph/` | `verveguy/liminis-context-graph` (`main/docs`) |
+| `v3rv.com/` | this repo |
+| `v3rv.com/liminis/` | `verveguy/liminis` (`marketing-site/`) |
+| `v3rv.com/liminis-context-graph/` | `verveguy/liminis-context-graph` |
 | `v3rv.com/liminis-editor/` | `verveguy/liminis-editor` |
-| `v3rv.com/concept-maps/` | `verveguy/concept-maps` (`main`) |
-| `v3rv.com/idd/` | `verveguy/idd` (`main`) |
+| `v3rv.com/liminis-diagrams/` | `verveguy/liminis-diagrams` |
+| `v3rv.com/concept-maps/` | `verveguy/concept-maps` |
+| `v3rv.com/idd/` | `verveguy/idd` |
 | `v3rv.com/max/` | this repo — resume redirect |
 
-Fabrik is deliberately *not* hosted here: it lives under the Handarbeit brand at
-[fabrik.handarbeit.io](https://fabrik.handarbeit.io), and the index links out to it.
+The component documentation sites run Starlight, so this one does too, pinned to
+the same versions. Matching by construction rather than by imitation is what
+makes the whole thing read as one set instead of a front page bolted onto some
+unrelated docs.
 
-Adding a new project page means enabling Pages on that repo — no change is needed here
-beyond a link.
+Fabrik is deliberately not hosted here: it lives under the Handarbeit brand at
+[fabrik.handarbeit.io](https://fabrik.handarbeit.io), and the index links out.
 
-## Local preview
+Adding a project means enabling Pages on that repo and adding a sidebar entry in
+`astro.config.mjs`.
+
+## Local development
 
 ```bash
-python3 -m http.server 8000
-# open http://localhost:8000
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # -> dist/
 ```
-
-The page is a single self-contained `index.html`: no build step, no dependencies, no
-external fonts or scripts.
 
 ## Deploy
 
-Pushing to `master` publishes to GitHub Pages.
+Pushing to `master` runs `.github/workflows/deploy.yml`, which builds the site
+and publishes it to GitHub Pages. Pages is configured to deploy **from a GitHub
+Actions workflow**, not from a branch — changing that setting back to a branch
+would serve the raw repository instead of the built site.
+
+### Two things that fail silently
+
+`public/CNAME` and `public/max/` are copied into `dist/` by Astro. If either
+stops being copied, the custom domain is dropped or the resume 404s, and neither
+announces itself. The deploy workflow asserts both exist before publishing.
 
 ## DNS
 
@@ -49,12 +64,10 @@ Apex (`v3rv.com`) — four A records pointing at GitHub Pages:
 185.199.111.153
 ```
 
-`www` subdomain — CNAME to `verveguy.github.io`. HTTPS is enforced; the certificate
-covers both `v3rv.com` and `www.v3rv.com`.
+`www` — CNAME to `verveguy.github.io`. HTTPS is enforced; the certificate covers
+both `v3rv.com` and `www.v3rv.com`.
 
 ## History
 
-Before 2026-08 this page was a WebGL "sakura" petal animation (© 2022 Anand Davaasuren,
-MIT, from [CodePen](https://codepen.io/at80/pen/tqdmv)) with no content. That animation
-and its `script.js` / `style.css` / `license.txt` were removed when the page became a
-portfolio index; they remain in git history.
+Until 2026-08 this was a WebGL "sakura" animation with no content, then a
+hand-built single-file portfolio page. Both are in git history.
