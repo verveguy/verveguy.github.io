@@ -12,6 +12,12 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'V3RV',
+
+      // No search. This site is a single page, so Pagefind had one document to
+      // index and nothing useful to discriminate between — a search box that
+      // can only ever return the page you are already on. The documentation
+      // sites keep theirs, where there is something to find.
+      pagefind: false,
       description: "Brett Adam's workbench: Fabrik, Liminis, Concept Maps, and other things built, mostly in the open.",
 
       social: {
