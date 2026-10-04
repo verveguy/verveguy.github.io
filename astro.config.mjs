@@ -39,7 +39,7 @@ export default defineConfig({
           items: [
             { label: 'Overview', slug: 'index' },
             { label: 'Fabrik', link: 'https://fabrik.handarbeit.io' },
-            { label: 'Liminis', link: '/liminis/' },
+            { label: 'Liminis', link: 'https://liminis.app/' },
             { label: 'Concept Maps', link: '/concept-maps/' }
           ]
         },
