@@ -11,9 +11,10 @@
     '/liminis-editor/': 'https://docs.liminis.app/liminis-editor/',
     '/liminis-diagrams/': 'https://docs.liminis.app/liminis-diagrams/',
     '/liminis-context-graph/': 'https://docs.liminis.app/liminis-context-graph/',
-    '/liminis/': 'https://liminis.app/'
+    '/liminis/': 'https://liminis.app/',
+    '/concept-maps/': 'https://models.liminis.app/'
   };
-  var path = location.pathname.replace(/^\/(liminis(-(editor|diagrams|context-graph))?)$/, '/$1/');
+  var path = location.pathname.replace(/^\/(liminis(-(editor|diagrams|context-graph))?|concept-maps)$/, '/$1/');
   for (var from in moved) {
     if (path.indexOf(from) === 0) {
       location.replace(moved[from] + path.slice(from.length) + location.search + location.hash);
