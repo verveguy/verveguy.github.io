@@ -20,9 +20,9 @@ export default defineConfig({
       pagefind: false,
       description: "Brett Adam's workbench: Fabrik, Liminis, Concept Maps, and other things built, mostly in the open.",
 
-      social: {
-        github: 'https://github.com/verveguy'
-      },
+      social: [
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/verveguy' }
+      ],
 
       // Deliberately stock: the project docs sites run Starlight's default
       // theme, and the point of this site is to belong to that set rather than
