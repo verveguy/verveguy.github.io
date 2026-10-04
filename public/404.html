@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not found | V3RV</title>
+<script>
+  // Project sites that moved off v3rv.com. Keep the rest of the path, query and
+  // hash, so deep links (e.g. /liminis-context-graph/v0.16.4/...) still land.
+  var moved = {
+    '/liminis-editor/': 'https://docs.liminis.app/liminis-editor/',
+    '/liminis-diagrams/': 'https://docs.liminis.app/liminis-diagrams/',
+    '/liminis-context-graph/': 'https://docs.liminis.app/liminis-context-graph/'
+  };
+  var path = location.pathname.replace(/^\/(liminis-(editor|diagrams|context-graph))$/, '/$1/');
+  for (var from in moved) {
+    if (path.indexOf(from) === 0) {
+      location.replace(moved[from] + path.slice(from.length) + location.search + location.hash);
+      break;
+    }
+  }
+</script>
+<style>
+  :root { --bg: #fff; --fg: #1a1a1a; --muted: #666; --link: #2a5bd7; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #17181c; --fg: #e8e8e8; --muted: #9a9a9a; --link: #8ab4ff; } }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, sans-serif; }
+  main { max-width: 36rem; margin: 5rem auto; padding: 0 16px; }
+  p { color: var(--muted); } a { color: var(--link); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Page not found</h1>
+  <p>Nothing lives at this address. <a href="/">Back to v3rv.com</a>.</p>
+</main>
+</body>
+</html>
