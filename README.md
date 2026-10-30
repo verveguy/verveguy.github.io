@@ -13,13 +13,24 @@ destinations:
 | URL | Served from |
 | --- | --- |
 | `v3rv.com/` | this repo |
-| `v3rv.com/liminis/` | `verveguy/liminis` (`marketing-site/`) |
-| `v3rv.com/liminis-context-graph/` | `verveguy/liminis-context-graph` |
-| `v3rv.com/liminis-editor/` | `verveguy/liminis-editor` |
-| `v3rv.com/liminis-diagrams/` | `verveguy/liminis-diagrams` |
-| `v3rv.com/concept-maps/` | this repo — redirect to `models.liminis.app` (Liminis Models) |
 | `v3rv.com/idd/` | `verveguy/idd` |
 | `v3rv.com/max/` | this repo — resume redirect |
+
+Several projects have since moved off this domain. Their repos left the
+`verveguy` account, so GitHub no longer serves them here; this repo keeps their
+old paths alive with redirects:
+
+| Old URL | Now at | Source repo |
+| --- | --- | --- |
+| `v3rv.com/liminis/` | `liminis.app` | `shadoworg/liminis-notes` |
+| `v3rv.com/liminis-context-graph/` | `docs.liminis.app/liminis-context-graph/` | `liminisapp/liminis-context-graph` |
+| `v3rv.com/liminis-editor/` | `docs.liminis.app/liminis-editor/` | `liminisapp/liminis-editor` |
+| `v3rv.com/liminis-diagrams/` | `docs.liminis.app/liminis-diagrams/` | `liminisapp/liminis-diagrams` |
+| `v3rv.com/concept-maps/` | `models.liminis.app` (Liminis Models) | `shadoworg/liminis-models` |
+
+Each old root has a stub at `public/<path>/index.html`; deeper links are caught
+by `public/404.html`, which keeps the rest of the path. A project that moves
+needs an entry in both.
 
 The component documentation sites run Starlight, so this one does too, pinned to
 the same versions. Matching by construction rather than by imitation is what
