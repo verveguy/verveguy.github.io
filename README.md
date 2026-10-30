@@ -17,7 +17,7 @@ destinations:
 | `v3rv.com/liminis-context-graph/` | `verveguy/liminis-context-graph` |
 | `v3rv.com/liminis-editor/` | `verveguy/liminis-editor` |
 | `v3rv.com/liminis-diagrams/` | `verveguy/liminis-diagrams` |
-| `v3rv.com/concept-maps/` | redirect stub → `models.liminis.app` (Liminis Models, `shadoworg/liminis-models`) |
+| `v3rv.com/concept-maps/` | this repo — redirect to `models.liminis.app` (Liminis Models) |
 | `v3rv.com/idd/` | `verveguy/idd` |
 | `v3rv.com/max/` | this repo — resume redirect |
 
