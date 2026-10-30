@@ -18,7 +18,7 @@ export default defineConfig({
       // can only ever return the page you are already on. The documentation
       // sites keep theirs, where there is something to find.
       pagefind: false,
-      description: "Brett Adam's workbench: Fabrik, Liminis, Concept Maps, and other things built, mostly in the open.",
+      description: "Brett Adam's workbench: Fabrik, Liminis, Liminis Models, and other things built, mostly in the open.",
 
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/verveguy' }
@@ -36,7 +36,7 @@ export default defineConfig({
             { label: 'Overview', slug: 'index' },
             { label: 'Fabrik', link: 'https://fabrik.handarbeit.io' },
             { label: 'Liminis', link: '/liminis/' },
-            { label: 'Concept Maps', link: '/concept-maps/' }
+            { label: 'Liminis Models', link: 'https://models.liminis.app' }
           ]
         },
         {
