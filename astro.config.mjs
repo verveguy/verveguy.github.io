@@ -22,7 +22,7 @@ export default defineConfig({
       // Our own public/404.html replaces Starlight's: it redirects the paths of
       // project sites that moved off this domain, deep links included.
       disable404Route: true,
-      description: "Brett Adam's workbench: Fabrik, Liminis, Concept Maps, and other things built, mostly in the open.",
+      description: "Brett Adam's workbench: Fabrik, Liminis, Liminis Models, and other things built, mostly in the open.",
 
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/verveguy' }
@@ -40,7 +40,7 @@ export default defineConfig({
             { label: 'Overview', slug: 'index' },
             { label: 'Fabrik', link: 'https://fabrik.handarbeit.io' },
             { label: 'Liminis', link: 'https://liminis.app/' },
-            { label: 'Concept Maps', link: 'https://models.liminis.app/app/' }
+            { label: 'Liminis Models', link: 'https://models.liminis.app/app/' }
           ]
         },
         {
