@@ -6,14 +6,26 @@ projects and tools, built with [Astro](https://astro.build) and
 
 ## Why Starlight
 
-Every *project* Pages site under the `verveguy` account inherits this repo's
-custom domain, so they are all paths on one host rather than separate
-destinations:
+This site began as the root of a single host. Every *project* Pages site under
+the `verveguy` account inherits this repo's custom domain, so each project was a
+path on `v3rv.com` rather than a separate destination, and running the same
+framework as the component docs sites made the whole thing read as one set
+instead of a front page bolted onto unrelated docs.
+
+Most of those projects have since moved to their own domains, so that argument no
+longer holds the way it did — but the conclusion outlives it. The sites this one
+links into still run Starlight, so a visitor crossing from here to
+`docs.liminis.app` meets the same furniture on the other side. Matching by
+construction rather than by imitation is what makes the crossing feel like
+navigation rather than a departure.
+
+Still served from this domain:
 
 | URL | Served from |
 | --- | --- |
 | `v3rv.com/` | this repo |
 | `v3rv.com/idd/` | `verveguy/idd` |
+| `v3rv.com/safari-history/` | `verveguy/safari-history` (Family Filter) |
 | `v3rv.com/max/` | this repo — resume redirect |
 
 Several projects have since moved off this domain. Their repos left the
@@ -32,10 +44,9 @@ Each old root has a stub at `public/<path>/index.html`; deeper links are caught
 by `public/404.html`, which keeps the rest of the path. A project that moves
 needs an entry in both.
 
-The component documentation sites run Starlight, so this one does too, pinned to
-the same versions. Matching by construction rather than by imitation is what
-makes the whole thing read as one set instead of a front page bolted onto some
-unrelated docs.
+Versions are kept close to the sites this one links into, but they live in
+separate repos that update on their own schedule, so a patch or two of drift is
+normal and does not change how the pages read.
 
 Fabrik is deliberately not hosted here: it lives under the Handarbeit brand at
 [fabrik.handarbeit.io](https://fabrik.handarbeit.io), and the index links out.
