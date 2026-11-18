@@ -25,7 +25,6 @@ Still served from this domain:
 | --- | --- |
 | `v3rv.com/` | this repo |
 | `v3rv.com/idd/` | `verveguy/idd` |
-| `v3rv.com/safari-history/` | `verveguy/safari-history` (Family Filter) |
 | `v3rv.com/max/` | this repo — resume redirect |
 
 Several projects have since moved off this domain. Their repos left the
@@ -39,6 +38,7 @@ old paths alive with redirects:
 | `v3rv.com/liminis-editor/` | `docs.liminis.app/liminis-editor/` | `liminisapp/liminis-editor` |
 | `v3rv.com/liminis-diagrams/` | `docs.liminis.app/liminis-diagrams/` | `liminisapp/liminis-diagrams` |
 | `v3rv.com/concept-maps/` | `models.liminis.app` (Liminis Models) | `shadoworg/liminis-models` |
+| `v3rv.com/safari-history/` | `family-filter.v3rv.com` (Family Filter) | `shadoworg/safari-history` |
 
 Each old root has a stub at `public/<path>/index.html`; deeper links are caught
 by `public/404.html`, which keeps the rest of the path. A project that moves
