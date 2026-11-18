@@ -55,7 +55,7 @@ export default defineConfig({
           label: 'Odds and ends',
           items: [
             { label: 'claude-topics', link: 'https://github.com/verveguy/claude-topics' },
-            { label: 'Family Filter', link: '/safari-history/' },
+            { label: 'Family Filter', link: 'https://family-filter.v3rv.com/' },
             { label: 'IDD character builder', link: '/idd/' },
             { label: 'tana-helper', link: 'https://github.com/verveguy/tana-helper' }
           ]
